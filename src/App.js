@@ -8,14 +8,14 @@ function App() {
   useEffect(() => {
     fetch('https://countries-search-data-prod-812920491762.asia-south1.run.app/countries')
       .then((res) => res.json())
-      .then((data) => {
-        setCountries(data);
-      })
+      .then((data) => setCountries(data))
       .catch((error) => console.error('Error fetching countries:', error));
   }, []);
 
-  const filteredCountries = countries.filter((country) =>
-    country.common?.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredCountries = countries.filter(
+    (country) =>
+      country.common &&
+      country.common.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
