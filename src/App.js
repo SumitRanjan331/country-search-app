@@ -12,10 +12,8 @@ function App() {
       .catch((error) => console.error('Error fetching countries:', error));
   }, []);
 
-  const filteredCountries = countries.filter(
-    (country) =>
-      country.common &&
-      country.common.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredCountries = countries.filter((country) =>
+    country.common.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -30,12 +28,16 @@ function App() {
       </div>
 
       <div className="countries-container">
-        {filteredCountries.map((country) => (
-          <div className="countryCard" key={country.common}>
-            <img src={country.png} alt={country.common} />
-            <h3>{country.common}</h3>
-          </div>
-        ))}
+        {filteredCountries.length > 0 ? (
+          filteredCountries.map((country) => (
+            <div className="countryCard" key={country.common}>
+              <img src={country.png} alt={country.common} />
+              <h3>{country.common}</h3>
+            </div>
+          ))
+        ) : (
+          <p>No countries found.</p>
+        )}
       </div>
     </div>
   );
